@@ -1,0 +1,29 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Test tap
+        run: |
+          brew tap scottrobertson/osxphotos
+          brew install --build-from-source scottrobertson/osxphotos/osxphotos
+          osxphotos --version
+          osxphotos --help
+
+      - name: Test formula audit
+        run: |
+          brew audit --strict scottrobertson/osxphotos/osxphotos
