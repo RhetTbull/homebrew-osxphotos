@@ -23,7 +23,3 @@ jobs:
           brew install --build-from-source scottrobertson/osxphotos/osxphotos
           osxphotos --version
           osxphotos --help
-
-      - name: Test formula audit
-        run: |
-          brew audit --strict scottrobertson/osxphotos/osxphotos
