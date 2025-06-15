@@ -6,7 +6,7 @@ A Homebrew tap for [osxphotos](https://github.com/RhetTbull/osxphotos) - a power
 
 ```bash
 # Add the tap
-brew tap scottrobertson/osxphotos
+brew tap RhetTbull/osxphotos
 
 # Install osxphotos
 brew install osxphotos

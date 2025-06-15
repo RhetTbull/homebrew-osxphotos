@@ -19,7 +19,7 @@ jobs:
 
       - name: Test tap
         run: |
-          brew tap scottrobertson/osxphotos
-          brew install --build-from-source scottrobertson/osxphotos/osxphotos
+          brew tap RhetTbull/osxphotos
+          brew install --build-from-source RhetTbull/osxphotos/osxphotos
           osxphotos --version
           osxphotos --help
