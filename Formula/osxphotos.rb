@@ -21,6 +21,11 @@ class Osxphotos < Formula
     # The whenever package falls back to its pure-Python implementation.
     rm Dir[libexec/"lib/python*/site-packages/whenever/_whenever*.so"]
 
+    # Same issue with tibs' Rust extension (pulled in by bitstring via
+    # osxmetadata). bitstring only imports tibs when BITSTRING_USE_RUST_CORE
+    # is set; otherwise it uses bitarray, so tibs is never loaded.
+    rm Dir[libexec/"lib/python*/site-packages/tibs/tibs*.so"]
+
     bin.install_symlink libexec/"bin/osxphotos"
   end
 end

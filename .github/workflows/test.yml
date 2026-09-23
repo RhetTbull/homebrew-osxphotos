@@ -11,11 +11,11 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Homebrew
         id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@main
 
       - name: Test tap
         run: |
@@ -23,3 +23,7 @@ jobs:
           brew install --build-from-source RhetTbull/osxphotos/osxphotos
           osxphotos --version
           osxphotos --help
+
+      - name: Test bitstring works without tibs Rust extension
+        run: |
+          "$(brew --prefix osxphotos)/libexec/bin/python" -c "import bitstring; bitstring.BitArray(uint=1, length=8)"
