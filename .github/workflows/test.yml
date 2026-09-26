@@ -24,6 +24,9 @@ jobs:
           osxphotos --version
           osxphotos --help
 
-      - name: Test bitstring works without tibs Rust extension
+      - name: Test Rust extensions load
         run: |
-          "$(brew --prefix osxphotos)/libexec/bin/python" -c "import bitstring; bitstring.BitArray(uint=1, length=8)"
+          PYTHON="$(brew --prefix osxphotos)/libexec/bin/python"
+          "$PYTHON" -c "import whenever._whenever; import whenever; whenever.Instant.now()"
+          BITSTRING_USE_RUST_CORE=1 "$PYTHON" -c "import tibs, bitstring; bitstring.BitArray(uint=1, length=8)"
+          "$PYTHON" -c "import bitstring; bitstring.BitArray(uint=1, length=8)"
