@@ -3,23 +3,23 @@ class Osxphotos < Formula
 
   desc "Export photos from Apple Photos app and query the Photos database"
   homepage "https://github.com/RhetTbull/osxphotos"
-  url "https://files.pythonhosted.org/packages/70/3b/bfd19eba72f76ab60005adc70c5b4b770e47927a66640a4ce9fbffd67ac8/osxphotos-0.77.0.tar.gz"
-  sha256 "fe6b89e100761cef2f5ae2a0d202735f1c0b07218db3265b7dba228cc2619a40"
+  version "0.77.2"
+  url "https://files.pythonhosted.org/packages/source/o/osxphotos/osxphotos-#{version}.tar.gz"
+  sha256 "9bb737d785b2467026d591417572b2c5888010a41664ab608dc134cca314ec66"
   license "MIT"
 
-  depends_on :macos
   depends_on "python@3.13"
-
-  # Rust extensions from PyPI wheels (e.g. whenever, tibs) are dylibs with
-  # @rpath install names and too little Mach-O header padding for Homebrew
-  # to rewrite them to absolute paths. Python loads extensions by path, so
-  # the install name doesn't matter; keep it as-is. Requires Homebrew >= 4.6.18.
-  preserve_rpath
+  depends_on :macos
 
   def install
     virtualenv_create(libexec, "python3")
     system libexec/"bin/python", "-m", "pip", "install", "--upgrade", "pip", "setuptools", "wheel"
     system libexec/"bin/python", "-m", "pip", "install", buildpath.to_s
+
+    # Remove whenever's Rust extension to avoid Homebrew dylib relinking
+    # failure (Mach-O header too small for rewritten install name).
+    # The whenever package falls back to its pure-Python implementation.
+    rm Dir[libexec/"lib/python*/site-packages/whenever/_whenever*.so"]
 
     bin.install_symlink libexec/"bin/osxphotos"
   end
