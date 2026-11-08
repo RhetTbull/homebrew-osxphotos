@@ -3,8 +3,8 @@ class Osxphotos < Formula
 
   desc "Export photos from Apple Photos app and query the Photos database"
   homepage "https://github.com/RhetTbull/osxphotos"
-  url "https://files.pythonhosted.org/packages/93/62/52ffeb1b5ae2f46dcd48f1cc97d51d779b10c41c580718be90611b106d36/osxphotos-0.78.0.tar.gz"
-  sha256 "a70f56381bed7adbdedfd6bc93729e8a48d2c38cfe441c9b1d99cbb8a71d19cc"
+  url "https://files.pythonhosted.org/packages/37/24/f1df22cee33127de0e5b51cafb8a9cdaba0deeeb8d99c905341740201d0a/osxphotos-0.78.1.tar.gz"
+  sha256 "726164b29cafc971aa72b7076d82c6155032cdfc44f4451130d22b334e90733f"
   license "MIT"
 
   depends_on :macos
